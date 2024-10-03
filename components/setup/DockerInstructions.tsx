@@ -40,9 +40,6 @@ ${selectedProvider === 'github' && selectedInstallationType === 'pat' ? `-e PROV
 
 	return (
 		<div className='p-4 relative'>
-			{selectedInstallationType === 'individual' && (
-				<InstructionsToGeneratePersonalAccessToken selectedInstallationType={selectedInstallationType} selectedProvider={selectedProvider} />
-			)}
 			{instructions.map((instruction, index) => (
 				<div key={`instruction-${index}`}>
 					<CodeWithCopyButton text={instruction.command} />
