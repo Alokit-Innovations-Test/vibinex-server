@@ -59,34 +59,6 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 	let failedCount = 0;
 
-	// Publish message to Pub/Sub for each install_id (topic name)
-	for (const installId of topicName) {
-		const data = {
-			repositoryProvider: 'bitbucket',
-			eventPayload: jsonBody,
-			repoConfig: repoConfig,
-			eventType: eventHeader
-		};
-
-		const msgType = 'webhook_callback';
-
-		console.debug(`[webookHandler] data = ${JSON.stringify(jsonBody)}`);
-		console.debug(`[webookHandler] installId = ${installId}`);
-		console.debug(`[webookHandler] repoConfig = ${JSON.stringify(repoConfig)}`);
-
-		const result: string | null = await publishMessage(installId, data, msgType)
-		.catch((error) => {
-			const eventProperties = { ...event_properties, topic_name: installId };
-			rudderStackEvents.track("absent", "", 'bitbucket-webhook', { type: 'publish-webhook-message', eventStatusFlag: 0, eventProperties });	
-			console.error('[webookHandler] Failed to publish message:', error);
-			failedCount++;
-			return null;
-		});
-
-		if (result === null) continue;
-
-		const eventProperties = { ...event_properties, topic_name: installId };
-		rudderStackEvents.track("absent", "", 'bitbucket-webhook', { type: 'publish-webhook-message', eventStatusFlag: 1, eventProperties });
 		console.info("[webookHandler] Sent message to pubsub for ", installId, result);
 	}
 
