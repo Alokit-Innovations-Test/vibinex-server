@@ -45,7 +45,6 @@ ${selectedProvider === 'github' && selectedInstallationType === 'pat' ? `-e PROV
 			)}
 			{instructions.map((instruction, index) => (
 				<div key={`instruction-${index}`}>
-					<RenderMarkdown markdownText={instruction.markdown} />
 					<CodeWithCopyButton text={instruction.command} />
 				</div>
 			))}
