@@ -25,13 +25,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 		repo_provider: provider
 	};
 
-	// Verify the event type
-	if (eventHeader !== 'pullrequest:approved' && eventHeader !== 'pullrequest:created' && eventHeader !== 'pullrequest:updated') {
-		const eventProperties = { ...event_properties, response_status: 400 };
-		rudderStackEvents.track("absent", "", 'bitbucket-webhook', { type: 'HTTP-400', eventStatusFlag: 0, eventProperties });
-		res.status(400).json({ error: 'Invalid event header' });
-		return;
-	}
+	
 	console.info("[webookHandler] Received bitbucket webhook event for ", repo_name);
 	if (!topicName) {
 		const eventProperties = { ...event_properties, response_status: 500 };
