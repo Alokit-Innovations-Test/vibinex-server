@@ -48,7 +48,6 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 	let failedCount = 0;
 
-	// Determine the response status code based on the number of failures
 	if (failedCount > 0) {
 		const eventProperties = { ...event_properties, response_status: 500, failed_count: failedCount};
 		rudderStackEvents.track("absent", "", 'bitbucket-webhook', { type: 'HTTP-500', eventStatusFlag: 0, eventProperties });
