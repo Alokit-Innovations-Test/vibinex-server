@@ -52,10 +52,6 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const eventProperties = { ...event_properties, response_status: 500, failed_count: failedCount};
 		rudderStackEvents.track("absent", "", 'bitbucket-webhook', { type: 'HTTP-500', eventStatusFlag: 0, eventProperties });
 		res.status(500).json({ error: `Failed to publish ${failedCount} messages to Pub/Sub` });
-	} else {
-		const eventProperties = { ...event_properties, response_status: 200, failed_count: failedCount };
-		rudderStackEvents.track("absent", "", 'bitbucket-webhook', { type: 'HTTP-200', eventStatusFlag: 1, eventProperties });
-		res.status(200).send("Success");
 	}
 }
 
