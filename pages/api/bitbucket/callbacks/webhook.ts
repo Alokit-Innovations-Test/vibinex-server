@@ -59,9 +59,6 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 	let failedCount = 0;
 
-		console.info("[webookHandler] Sent message to pubsub for ", installId, result);
-	}
-
 	// Determine the response status code based on the number of failures
 	if (failedCount > 0) {
 		const eventProperties = { ...event_properties, response_status: 500, failed_count: failedCount};
