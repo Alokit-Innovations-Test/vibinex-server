@@ -4,6 +4,7 @@ import React from 'react';
 
 import { RenderMarkdown } from "../RenderMarkdown";
 import CodeWithCopyButton from './CodeWithCopyButton';
+
 import InstructionsToGeneratePersonalAccessToken from './InstructionsToGeneratePersonalAccessToken';
 
 interface DockerInstructionsProps {
