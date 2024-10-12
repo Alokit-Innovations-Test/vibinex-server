@@ -32,7 +32,7 @@ ${selectedProvider === 'github' && selectedInstallationType === 'pat' ? `-e PROV
 			command: `mkdir -p ~/.config/vibinex`,
 		},
 		{
-			markdown: `3. **Run the image with the options given below. These are unique to you. Refresh the DPU Status in the side bar to check if dpu started**`,
+			markdown: `3. **Run the image with the options given below. These are unique to you. Refresh the Dpu Status in the side bar to check if dpu started**`,
 			command: selfHostingCode,
 		}
 	];
@@ -40,12 +40,8 @@ ${selectedProvider === 'github' && selectedInstallationType === 'pat' ? `-e PROV
 
 	return (
 		<div className='p-4 relative'>
-			{selectedInstallationType === 'individual' && (
-				<InstructionsToGeneratePersonalAccessToken selectedInstallationType={selectedInstallationType} selectedProvider={selectedProvider} />
-			)}
 			{instructions.map((instruction, index) => (
 				<div key={`instruction-${index}`}>
-					<RenderMarkdown markdownText={instruction.markdown} />
 					<CodeWithCopyButton text={instruction.command} />
 				</div>
 			))}
